@@ -1,6 +1,43 @@
-@KeyedServices_HostAddress = http://localhost:5142
+@KeyedServices_HostAddress = https://localhost:7182
 
-GET {{KeyedServices_HostAddress}}/weatherforecast/
+POST {{KeyedServices_HostAddress}}/api/application/message
+Content-Type: application/json
 Accept: application/json
 
+{
+    "messageText": "This uses the default notification!",
+    "messageType": "default"
+}
+
 ###
+
+POST {{KeyedServices_HostAddress}}/api/application/message
+Content-Type: application/json
+Accept: application/json
+
+{
+    "messageText": "This is an email notification!",
+    "messageType": "email"
+}
+
+###
+
+POST {{KeyedServices_HostAddress}}/api/application/message
+Content-Type: application/json
+Accept: application/json
+
+{
+    "messageText": "This is a push notification!",
+    "messageType": "push"
+}
+
+###
+
+POST {{KeyedServices_HostAddress}}/api/application/message
+Content-Type: application/json
+Accept: application/json
+
+{
+    "messageText": "This is a sms notification!",
+    "messageType": "sms"
+}

@@ -9,7 +9,7 @@ namespace KeyedServices.Models.Enums;
 public enum NotificationType
 {
     Unknown = 0,
-    Message = 1,
+    Default = 1,
     Sms = 2,
     Push = 3,
     Email = 4,

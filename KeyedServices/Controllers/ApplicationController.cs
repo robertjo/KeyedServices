@@ -13,7 +13,7 @@ public class ApplicationController(
     IApplicationService applicationService)
     : ControllerBase
 {
-    [HttpPost("SendMessage")]
+    [HttpPost("message")]
     public IActionResult SendMessage(Message message)
     {
         var result = applicationService.SendMessage(message);
