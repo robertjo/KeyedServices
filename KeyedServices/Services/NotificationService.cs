@@ -35,3 +35,13 @@ public class SmsNotificationService : INotificationService
             message: $"Message sent via Sms: {messageText}");
     }
 }
+
+public class NotificationService : INotificationService
+{
+    public ProcessResult SendNotification(string messageText)
+    {
+        return new ProcessResult(
+            isSuccess: true,
+            message: $"Message sent via non-defined: {messageText}");
+    }
+}

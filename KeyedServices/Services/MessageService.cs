@@ -7,6 +7,16 @@ using KeyedServices.Services.Interfaces;
 
 namespace KeyedServices.Services;
 
+public class MessageService(
+    INotificationService notificationService)
+    : IMessageService
+{
+    public ProcessResult SendMessage(string messageText)
+    {
+        return notificationService.SendNotification(messageText);
+    }
+}
+
 public class EmailMessageService(
     [FromKeyedServices(Keys.Email)] INotificationService notificationService)
     : IMessageService

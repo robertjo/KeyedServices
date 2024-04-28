@@ -8,6 +8,7 @@ using KeyedServices.Services.Interfaces;
 namespace KeyedServices.Services;
 
 public class ApplicationService(
+    MessageService messageService,
     EmailMessageService emailMessageService,
     PushMessageService pushMessageService,
     SmsMessageService smsMessageService)
@@ -16,6 +17,7 @@ public class ApplicationService(
     public ProcessResult SendMessage(Message message) =>
         message.MessageType switch
         {
+            NotificationType.Message => SendMessage(message.MessageText),
             NotificationType.Email => SendEmailMessage(message.MessageText),
             NotificationType.Push => SendPushMessage(message.MessageText),
             NotificationType.Sms => SendSmsMessage(message.MessageText),
@@ -23,6 +25,11 @@ public class ApplicationService(
                 isSuccess: false,
                 message: "NotificationType not matched."),
         };
+
+    public ProcessResult SendMessage(string messageText)
+    {
+        return messageService.SendMessage(messageText);
+    }
 
     public ProcessResult SendEmailMessage(string messageText)
     {
