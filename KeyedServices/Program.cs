@@ -1,3 +1,9 @@
+// Licensed to the .NET Foundation under one or more agreements.
+// The .NET Foundation licenses this file to you under the MIT license.
+
+using KeyedServices.Configuration;
+using KeyedServices.Services;
+using KeyedServices.Services.Interfaces;
 
 namespace KeyedServices
 {
@@ -14,6 +20,18 @@ namespace KeyedServices
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            //builder.Services.AddSingleton<INotificationService, SmsNotificationService>();
+            //builder.Services.AddSingleton<INotificationService, PushNotificationService>();
+            //builder.Services.AddSingleton<INotificationService, EmailNotificationService>();
+
+            builder.Services.AddScoped<EmailMessageService>();
+            builder.Services.AddScoped<PushMessageService>();
+            builder.Services.AddScoped<SmsMessageService>();
+
+            builder.Services.AddKeyedScoped<INotificationService, SmsNotificationService>(Keys.Sms);
+            builder.Services.AddKeyedScoped<INotificationService, PushNotificationService>(Keys.Push);
+            builder.Services.AddKeyedScoped<INotificationService, EmailNotificationService>(Keys.Email);
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -26,7 +44,6 @@ namespace KeyedServices
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
-
 
             app.MapControllers();
 
