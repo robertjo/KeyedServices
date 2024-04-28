@@ -20,13 +20,15 @@ namespace KeyedServices
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            //builder.Services.AddSingleton<INotificationService, SmsNotificationService>();
-            //builder.Services.AddSingleton<INotificationService, PushNotificationService>();
-            //builder.Services.AddSingleton<INotificationService, EmailNotificationService>();
+            builder.Services.AddScoped<IApplicationService, ApplicationService>();
 
             builder.Services.AddScoped<EmailMessageService>();
             builder.Services.AddScoped<PushMessageService>();
             builder.Services.AddScoped<SmsMessageService>();
+
+            //builder.Services.AddSingleton<INotificationService, SmsNotificationService>();
+            //builder.Services.AddSingleton<INotificationService, PushNotificationService>();
+            //builder.Services.AddSingleton<INotificationService, EmailNotificationService>();
 
             builder.Services.AddKeyedScoped<INotificationService, SmsNotificationService>(Keys.Sms);
             builder.Services.AddKeyedScoped<INotificationService, PushNotificationService>(Keys.Push);
